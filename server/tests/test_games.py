@@ -1,3 +1,9 @@
+"""
+Unit tests for game API routes in the Tailspin Toys Crowd Funding platform.
+This module contains comprehensive tests for the games endpoints including
+success scenarios, error handling, and data validation.
+"""
+
 import unittest
 import json
 from typing import Dict, List, Any, Optional
@@ -6,6 +12,8 @@ from models import Game, Publisher, Category, db, init_db
 from routes.games import games_bp
 
 class TestGamesRoutes(unittest.TestCase):
+    """Test suite for games API endpoints and functionality."""
+    
     # Test data as complete objects
     TEST_DATA: Dict[str, Any] = {
         "publishers": [
