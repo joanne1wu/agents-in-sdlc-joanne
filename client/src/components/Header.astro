@@ -2,42 +2,105 @@
 // Import any necessary dependencies
 ---
 
-<header class="bg-blue-500 dark:bg-blue-700 text-white p-4 shadow-md transition-colors duration-300">
-  <div class="container mx-auto flex justify-between items-center pl-4 pr-4">
+<!-- Enhanced Modern Header -->
+<header class="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 dark:from-blue-800 dark:via-blue-900 dark:to-purple-900 text-white shadow-2xl border-b border-blue-500/20">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-transparent to-purple-600/10"></div>
+  <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.1) 0%, transparent 50%);"></div>
+  
+  <div class="relative z-10 container mx-auto flex justify-between items-center px-6 py-4">
     <div class="flex items-center">
+      <!-- Enhanced Menu Button -->
       <div class="relative group">
-        <button id="menu-toggle" class="focus:outline-none mr-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="menu-toggle" class="focus:outline-none mr-6 p-2 rounded-full hover:bg-white/10 transition-all duration-300 focus:ring-2 focus:ring-white/20">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <nav id="menu" class="hidden absolute left-0 mt-2 w-48 bg-white dark:bg-slate-800 text-slate-800 dark:text-white rounded shadow-lg z-10 transition-colors duration-300">
-          <ul class="py-1">
-            <li><a href="/" class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700">Home</a></li>
-            <li><a href="/about" class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700">About</a></li>
-          </ul>
+        
+        <!-- Enhanced Dropdown Menu -->
+        <nav id="menu" class="hidden absolute left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-lg text-white rounded-2xl shadow-2xl border border-slate-600/50 z-20 overflow-hidden transition-all duration-300">
+          <div class="py-2">
+            <a href="/" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 transition-all duration-200 group">
+              <svg class="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+              <span class="font-medium">Home</span>
+            </a>
+            <a href="/about" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 transition-all duration-200 group">
+              <svg class="w-4 h-4 text-purple-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="font-medium">About</span>
+            </a>
+          </div>
         </nav>
       </div>
-      <h1 class="text-xl font-bold"><a href="/" class="hover:underline">Tailspin Toys</a></h1>
+      
+      <!-- Enhanced Logo/Brand -->
+      <div class="flex items-center gap-3">
+        <!-- Brand Icon -->
+        <div class="w-10 h-10 bg-gradient-to-br from-white/20 to-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        
+        <!-- Brand Text -->
+        <h1 class="text-2xl font-bold">
+          <a href="/" class="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent hover:from-blue-100 hover:via-purple-100 hover:to-pink-100 transition-all duration-300 transform hover:scale-105">
+            Tailspin Toys
+          </a>
+        </h1>
+      </div>
+    </div>
+    
+    <!-- Additional Header Elements -->
+    <div class="hidden md:flex items-center gap-4">
+      <!-- Status Indicator -->
+      <div class="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 border border-green-500/30 rounded-full">
+        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+        <span class="text-sm font-medium text-green-100">Live</span>
+      </div>
+      
+      <!-- CTA Button -->
+      <a href="#featured-games" class="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 rounded-full font-medium transition-all duration-300 backdrop-blur-sm hover:scale-105">
+        Browse Games
+      </a>
     </div>
   </div>
 </header>
 
 <script>
-  // Toggle menu visibility when hamburger is clicked
+  // Enhanced menu toggle functionality
   const menuToggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('menu');
   
   if (menuToggle && menu) {
     menuToggle.addEventListener('click', () => {
       menu.classList.toggle('hidden');
+      
+      // Add animation classes
+      if (!menu.classList.contains('hidden')) {
+        menu.style.opacity = '0';
+        menu.style.transform = 'translateY(-10px)';
+        requestAnimationFrame(() => {
+          menu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          menu.style.opacity = '1';
+          menu.style.transform = 'translateY(0)';
+        });
+      }
     });
     
     // Close menu when clicking outside
     document.addEventListener('click', (event) => {
       const isClickInside = menuToggle.contains(event.target as Node) || menu.contains(event.target as Node);
       if (!isClickInside && !menu.classList.contains('hidden')) {
-        menu.classList.add('hidden');
+        menu.style.opacity = '0';
+        menu.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+          menu.classList.add('hidden');
+        }, 300);
       }
     });
   }
