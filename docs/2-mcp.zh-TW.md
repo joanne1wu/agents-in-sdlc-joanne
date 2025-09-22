@@ -207,14 +207,48 @@ Tips: 可以在 GitHub Pull Requests 的界面中, 看到目前的 Pull Requests
 請注意，設定過程與 GitHub MCP 伺服器類似，但您不需要提供任何憑證，如 GitHub 個人存取權杖。這是因為 Playwright MCP 伺服器不需要驗證來存取其功能。
 
 ### 使用 Agent mode + playwright mcp 工具去搜尋資料
+
+使用 Playwright MCP 工具可以自動化瀏覽網頁並提取有用的資訊。以下是一個實際的例子：
+
 ``` bash
 #playwright 幫我找 有關 github 的演講主題
 https://www.digitimes.com.tw/Seminar/DevDaysAsia2025/index.html
 ```
-### 使用 Agent mode + playwright mcp 工具, 做自動化測試
+
+這個指令會：
+1. 自動導覽到指定的研討會網站
+2. 搜尋包含 GitHub 相關關鍵字的內容，如：
+   - "GitHub", "Git", "Repository"
+   - "Version Control", "DevOps", "CI/CD"
+   - "Actions", "Collaboration", "Open Source"
+3. 提取相關的演講主題和講者資訊
+4. 按相關性評分排序並回傳結果
+
+預期的輸出格式：
+```markdown
+## 找到的 GitHub 相關演講主題
+
+### 高相關性演講
+1. **"掌握 GitHub Actions 的 CI/CD"**
+   - 講者：John Doe
+   - 時間：上午 10:00 - 11:00
+   - 主題：GitHub Actions, 自動化, DevOps
+
+2. **"使用 Git 和 GitHub 進行協作開發"**
+   - 講者：Jane Smith
+   - 時間：下午 2:00 - 3:00
+   - 主題：版本控制, 協作, 程式碼審查
 ```
+
+### 使用 Agent mode + playwright mcp 工具, 做自動化測試
+
+Playwright 也可以用於執行自動化測試：
+
+```bash
 #playwright to test games.spec.ts and home.spec.ts
 ```
+
+這個功能已經在專案中實現，您可以參考 `client/e2e-tests/github-topics-finder.spec.ts` 檔案中的實作範例。
 
 ## 資源
 
