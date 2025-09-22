@@ -23,4 +23,23 @@ test.describe('Home Page', () => {
     const welcomeMessage = page.locator('p').first();
     await expect(welcomeMessage).toHaveText('Find your next game! And maybe even back one! Explore our collection!');
   });
+
+  test('should display the games grid with games loaded', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for the games grid to load
+    await page.waitForSelector('[data-testid="games-grid"]', { timeout: 10000 });
+    
+    // Check that the games grid is visible
+    const gamesGrid = page.locator('[data-testid="games-grid"]');
+    await expect(gamesGrid).toBeVisible();
+    
+    // Check that at least one game card is present
+    const gameCards = page.locator('[data-testid="game-card"]');
+    await expect(gameCards.first()).toBeVisible();
+    
+    // Verify we have multiple games displayed
+    const gameCount = await gameCards.count();
+    expect(gameCount).toBeGreaterThan(0);
+  });
 });
