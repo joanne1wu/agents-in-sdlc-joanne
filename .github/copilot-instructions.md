@@ -16,6 +16,60 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 ### Code formatting requirements
 
 - When writing Python, you must use type hints for return values and function parameters.
+- All Python files must include a module-level docstring at the top describing the file's purpose.
+- All functions and classes must include comprehensive docstrings using Google style format.
+- Docstrings must include descriptions of parameters, return values, and any exceptions raised.
+
+#### Python Documentation Standards
+
+**File Headers:** Every Python file should start with a module docstring:
+```python
+"""
+Brief description of the module's purpose.
+
+This module provides [functionality description]. It contains [brief overview of 
+main components/classes/functions].
+"""
+```
+
+**Function Docstrings:** Use Google style format:
+```python
+def example_function(param1: str, param2: int = 0) -> bool:
+    """
+    Brief description of what the function does.
+    
+    Longer description if needed, explaining the purpose and behavior
+    in more detail.
+    
+    Args:
+        param1: Description of the first parameter.
+        param2: Description of the second parameter. Defaults to 0.
+        
+    Returns:
+        Description of the return value and its type.
+        
+    Raises:
+        ValueError: Description of when this exception is raised.
+        TypeError: Description of when this exception is raised.
+    """
+    pass
+```
+
+**Class Docstrings:** Include class purpose and key attributes:
+```python
+class ExampleClass:
+    """
+    Brief description of the class purpose.
+    
+    Longer description explaining the class behavior, use cases,
+    and any important implementation details.
+    
+    Attributes:
+        attribute_name: Description of the attribute.
+        another_attr: Description of another attribute.
+    """
+    pass
+```
 
 ### Python and Flask Patterns
 
