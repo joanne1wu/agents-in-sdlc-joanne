@@ -73,7 +73,7 @@ test.describe('Game Listing and Navigation', () => {
     // Check that either publisher or category (or both) are present
     const publisherExists = await page.locator('[data-testid="game-details-publisher"]').isVisible();
     const categoryExists = await page.locator('[data-testid="game-details-category"]').isVisible();
-    expect(publisherExists && categoryExists).toBeTruthy();
+    expect(publisherExists || categoryExists).toBeTruthy();
     
     // If publisher exists, check it has content
     if (publisherExists) {
@@ -123,12 +123,66 @@ test.describe('Game Listing and Navigation', () => {
     // Navigate to a game that doesn't exist
     await page.goto('/game/99999');
     
-    // The page should load without crashing
-    // Check if there's an error message or if it handles gracefully
+    // Wait for the page to load and check for error handling
     await page.waitForTimeout(3000);
     
-    // The page should either show an error or handle it gracefully
-    // We expect the page to not crash and still have a valid title
+    // The page should handle the error gracefully - check for error message specifically
+    const errorMessage = page.locator('.bg-red-500\\/20', { hasText: /Failed to fetch game/ });
+    
+    // An error message should be shown
+    await expect(errorMessage).toBeVisible();
+    
+    // The page should still have a valid title structure
     await expect(page).toHaveTitle(/Game Details - Tailspin Toys/);
+  });
+
+  test('should display game cards with proper structure on home page', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for games to load
+    await page.waitForSelector('[data-testid="games-grid"]', { timeout: 10000 });
+    
+    const gameCards = page.locator('[data-testid="game-card"]');
+    const firstGameCard = gameCards.first();
+    
+    // Check that the game card has all required elements
+    await expect(firstGameCard.locator('[data-testid="game-title"]')).toBeVisible();
+    await expect(firstGameCard.locator('[data-testid="game-description"]')).toBeVisible();
+    
+    // Check that the game card has data attributes for navigation
+    const gameId = await firstGameCard.getAttribute('data-game-id');
+    const gameTitle = await firstGameCard.getAttribute('data-game-title');
+    
+    expect(gameId).toBeTruthy();
+    expect(gameTitle).toBeTruthy();
+  });
+
+  test('should display "View details" text in game cards', async ({ page }) => {
+    await page.goto('/');
+    
+    // Wait for games to load
+    await page.waitForSelector('[data-testid="games-grid"]', { timeout: 10000 });
+    
+    const firstGameCard = page.locator('[data-testid="game-card"]').first();
+    
+    // Check that "View details" text is present
+    await expect(firstGameCard.locator('text=View details')).toBeVisible();
+  });
+
+  test('should display star rating when available', async ({ page }) => {
+    await page.goto('/game/1');
+    
+    // Wait for game details to load
+    await page.waitForSelector('[data-testid="game-details"]', { timeout: 10000 });
+    
+    // Check if rating is displayed (it might not be available for all games)
+    const ratingElement = page.locator('[data-testid="game-rating"]');
+    const ratingExists = await ratingElement.isVisible();
+    
+    if (ratingExists) {
+      // If rating exists, it should have content
+      const ratingText = await ratingElement.textContent();
+      expect(ratingText?.trim()).toBeTruthy();
+    }
   });
 });
