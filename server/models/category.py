@@ -1,8 +1,22 @@
+"""
+Category model for the Tailspin Toys Crowd Funding platform.
+This module defines the Category SQLAlchemy model with validation and serialization methods.
+"""
+
 from . import db
 from .base import BaseModel
 from sqlalchemy.orm import validates, relationship
 
 class Category(BaseModel):
+    """
+    Category model representing game categories in the crowdfunding platform.
+    
+    Attributes:
+        id: Primary key identifier
+        name: Category name (required, unique, min 2 characters)
+        description: Category description (optional, min 10 characters if provided)
+        games: Relationship to Game models in this category
+    """
     __tablename__ = 'categories'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -14,16 +28,54 @@ class Category(BaseModel):
     
     @validates('name')
     def validate_name(self, key, name):
+        """
+        Validates the category name ensuring it meets minimum length requirements.
+        
+        Args:
+            key: The field name being validated
+            name: The name value to validate
+            
+        Returns:
+            str: The validated name
+            
+        Raises:
+            ValueError: If name is empty or too short
+        """
         return self.validate_string_length('Category name', name, min_length=2)
         
     @validates('description')
     def validate_description(self, key, description):
+        """
+        Validates the category description ensuring it meets minimum length requirements when provided.
+        
+        Args:
+            key: The field name being validated
+            description: The description value to validate
+            
+        Returns:
+            str: The validated description
+            
+        Raises:
+            ValueError: If description is too short (when provided)
+        """
         return self.validate_string_length('Description', description, min_length=10, allow_none=True)
     
     def __repr__(self):
+        """
+        Returns a string representation of the Category object.
+        
+        Returns:
+            str: String representation including category name
+        """
         return f'<Category {self.name}>'
         
     def to_dict(self):
+        """
+        Converts the Category object to a dictionary for JSON serialization.
+        
+        Returns:
+            dict: Dictionary representation of the category with game count
+        """
         return {
             'id': self.id,
             'name': self.name,

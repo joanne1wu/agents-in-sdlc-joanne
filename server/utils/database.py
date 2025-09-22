@@ -1,3 +1,9 @@
+"""
+Database initialization utilities for the Tailspin Toys Crowd Funding platform.
+This module provides functions to initialize and configure the SQLAlchemy database
+connection for both development and testing environments.
+"""
+
 import os
 from models import init_db as models_init_db
 
